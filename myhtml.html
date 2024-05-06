@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Button Grid Test</title>
+    <style>
+        /* CSS styles for button grid */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: lightblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Button Grid Test</h1>
+
+    <div class="button-grid" id="buttonGrid">
+        <!-- Buttons will be dynamically added here using JavaScript -->
+    </div>
+
+    <script>
+        // JavaScript to handle button clicks
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttonGrid = document.getElementById("buttonGrid");
+
+            // Button labels
+            const buttonLabels = [
+                "Button 1",
+                "Another Long Button",
+                "Short",
+                "Button 4",
+                "A Very Long Button Label",
+                "Click Me"
+            ];
+
+            // Function to create custom button HTML
+            function createButtonHTML(label, index) {
+                const buttonId = `button_${index}`;
+                return `<button id="${buttonId}" class="button">${label}</button>`;
+            }
+
+            // Populate the button grid with custom buttons
+            buttonLabels.forEach((label, index) => {
+                const buttonHTML = createButtonHTML(label, index);
+                buttonGrid.innerHTML += buttonHTML;
+            });
+
+            // Add click event listeners to buttons
+            buttonGrid.addEventListener("click", function(event) {
+                if (event.target.tagName === "BUTTON") {
+                    const button = event.target;
+                    button.style.backgroundColor = "green"; // Change button color on click
+                    button.disabled = true; // Disable button on click
+                }
+            });
+        });
+    </script>
+</body>
+</html>
